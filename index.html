@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AUV — Attack-Inference Aligned Universal Adversarial Attacks</title>
+  <meta name="description" content="AUV aligns universal adversarial attacks with target initialization and memory-based propagation in video object segmentation, enabling fast, sustained, prompt-agnostic attacks.">
+  <meta name="author" content="Ruiqi Shen, Chang Liu, Henghui Ding">
+  <meta name="theme-color" content="#246b72">
+  <meta property="og:title" content="AUV — Attack-Inference Aligned Universal Adversarial Attacks on Video Object Segmentation">
+  <meta property="og:description" content="One universal perturbation. Two aligned stages. Fast, sustained, and prompt-agnostic attacks on video object segmentation.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/auv_teaser.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="citation_title" content="Attack-Inference Aligned Universal Adversarial Attacks on Video Object Segmentation">
+  <meta name="citation_author" content="Shen, Ruiqi">
+  <meta name="citation_author" content="Liu, Chang">
+  <meta name="citation_author" content="Ding, Henghui">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="static/style.css">
+  <script src="static/main.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <main id="main">
+    <section class="hero container" id="top" aria-labelledby="paper-title">
+      <p class="method-name">AUV</p>
+      <h1 id="paper-title">Attack-Inference Aligned Universal Adversarial<br class="desktop-break"> Attacks on Video Object Segmentation</h1>
+      <div class="authors">
+        <span>Ruiqi Shen<sup>1</sup></span>
+        <a href="https://changliu19.github.io/" target="_blank" rel="noopener noreferrer">Chang Liu<sup>2,✉</sup></a>
+        <a href="https://henghuiding.com/" target="_blank" rel="noopener noreferrer">Henghui Ding<sup>1,✉</sup></a>
+      </div>
+      <p class="affiliations"><span><sup>1</sup> Fudan University</span><span><sup>2</sup> Shanghai University of Finance and Economics</span></p>
+      <p class="correspondence">✉ Corresponding authors</p>
+      <div class="resource-links">
+        <a class="button primary" href="assets/paper.pdf" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a>
+        <a class="button" href="https://github.com/FudanCVL/AUV" target="_blank" rel="noopener noreferrer">Code <span aria-hidden="true">↗</span></a>
+      </div>
+      <p class="hero-summary"><strong>Strong, sustained, and prompt-agnostic attacks</strong> for real-world videos.</p>
+    </section>
+
+    <figure class="container teaser">
+      <button class="figure-button" data-zoom aria-label="Enlarge AUV teaser">
+        <img src="assets/auv_teaser.png" width="1596" height="656" alt="AUV attacks initialization and propagation with one UAP, enabling transfer across mask, point, box, and language prompt types and persistent suppression.">
+        <span class="zoom-hint" aria-hidden="true">↗ Enlarge</span>
+      </button>
+      <figcaption>AUV targets both the initialization and propagation stages of VOS for persistent and prompt-agnostic attacks.</figcaption>
+    </figure>
+
+    <section class="section abstract-section" aria-labelledby="abstract-title">
+      <div class="reading-width">
+        <h2 id="abstract-title">Abstract</h2>
+        <p>Modern video object segmentation (VOS) relies on a two-stage inference paradigm: target initialization and memory-based propagation. 
+          However, existing adversarial attacks on VOS often overlook this structure. We therefore propose <strong>AUV</strong>, an adversarial framework
+          that optimizes a universal adversarial perturbation (UAP) through decoupled strategies aligned with both stages. 
+          By disrupting the shared memory space, it enables prompt-agnostic attacks across masks, points, boxes, and language.</p>
+        <p>AUV achieves new SOTA attack performance across VOS benchmarks and prompt types, demonstrating the fastest and longest-lasting suppression, 
+          with the framework adaptable to different VOS models.</p>
+      </div>
+    </section>
+
+    <section class="section container" id="method" aria-labelledby="method-title">
+      <div class="section-heading"><h2 id="method-title">Two aligned stages, One perturbation</h2></div>
+      <figure>
+        <button class="figure-button" data-zoom aria-label="Enlarge AUV method diagram">
+          <img src="assets/auv_overview.png" width="1592" height="708" loading="lazy" alt="A shared UAP corrupts the initial memory anchor and flattens memory-attended features during subsequent propagation.">
+          <span class="zoom-hint" aria-hidden="true">↗ Enlarge</span>
+        </button>
+      </figure>
+      <div class="stage-grid">
+        <article><span class="stage-label">01 / Initialization</span><h3>Corrupt the memory anchor</h3><p class="stage-note">Remove target identity at its source.</p></article>
+        <article><span class="stage-label">02 / Propagation</span><h3>Flatten memory spatial saliency</h3><p class="stage-note">Disrupt target association over time.</p></article>
+      </div>
+    </section>
+
+    <section class="section results-section" id="results" aria-labelledby="results-title">
+      <div class="container">
+        <div class="section-heading"><h2 id="results-title">New SOTA attack performance</h2><p>Results with mask prompt. See the <a href="assets/paper.pdf" target="_blank" rel="noopener">paper</a> for full comparisons.</p></div>
+        <div class="table-wrap" tabindex="0" role="region" aria-label="Mask-prompted results, scroll horizontally on small screens">
+          <table class="results-table">
+            <thead><tr><th rowspan="2" scope="col">Benchmark</th><th rowspan="2" scope="col">Metric ↓</th><th colspan="2" scope="colgroup">SAM3</th><th colspan="2" scope="colgroup">SAM2.1-B+</th></tr><tr><th scope="col">Clean</th><th scope="col">Attacked</th><th scope="col">Clean</th><th scope="col">Attacked</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">DAVIS17</th><td><img class="metric" src="assets/metric_jf.svg" alt="J and F"></td><td>92.2</td><td class="attacked">8.4</td><td>89.0</td><td class="attacked">12.1</td></tr>
+              <tr><th scope="row">YTVOS19</th><td><img class="metric" src="assets/metric_g.svg" alt="G"></td><td>89.7</td><td class="attacked">14.0</td><td>88.0</td><td class="attacked">19.2</td></tr>
+              <tr><th scope="row">MOSEv2</th><td><img class="metric dotted" src="assets/metric_jf_dot.svg" alt="J and dotted F"></td><td>60.3</td><td class="attacked">24.6</td><td>46.0</td><td class="attacked">26.5</td></tr>
+              <tr><th scope="row">MOSEv1</th><td><img class="metric" src="assets/metric_jf.svg" alt="J and F"></td><td>78.4</td><td class="attacked">21.1</td><td>73.6</td><td class="attacked">23.2</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="prompt-explorer">
+          <div class="explorer-heading"><div><h3>Prompt-agnostic attack</h3><p id="prompt-description">SAM3 · Mask prompt · VOS benchmarks</p></div><div class="prompt-controls" role="group" aria-label="Choose SAM3 prompt type"><button type="button" data-prompt="mask" aria-pressed="true">Mask</button><button type="button" data-prompt="point" aria-pressed="false">Point</button><button type="button" data-prompt="box" aria-pressed="false">Box</button><button type="button" data-prompt="language" aria-pressed="false">Language</button></div></div>
+          <p class="legend"><span><i class="clean-swatch"></i>Clean</span><span><i class="attack-swatch"></i>AUV</span></p>
+          <div class="benchmark-bars" id="prompt-results" aria-live="polite" aria-atomic="true">
+            <div class="bar-group"><h4>DAVIS17 <img class="metric" src="assets/metric_jf.svg" alt="J and F"></h4><div class="bar-row"><span>Clean</span><div class="track"><div class="bar clean" style="width:92.2%"></div></div><output>92.2</output></div><div class="bar-row"><span>AUV</span><div class="track"><div class="bar attack" style="width:8.4%"></div></div><output>8.4</output></div></div>
+            <div class="bar-group"><h4>YTVOS19 <img class="metric" src="assets/metric_g.svg" alt="G"></h4><div class="bar-row"><span>Clean</span><div class="track"><div class="bar clean" style="width:89.7%"></div></div><output>89.7</output></div><div class="bar-row"><span>AUV</span><div class="track"><div class="bar attack" style="width:14%"></div></div><output>14.0</output></div></div>
+            <div class="bar-group"><h4>MOSEv2 <img class="metric dotted" src="assets/metric_jf_dot.svg" alt="J and dotted F"></h4><div class="bar-row"><span>Clean</span><div class="track"><div class="bar clean" style="width:60.3%"></div></div><output>60.3</output></div><div class="bar-row"><span>AUV</span><div class="track"><div class="bar attack" style="width:24.6%"></div></div><output>24.6</output></div></div>
+            <div class="bar-group"><h4>MOSEv1 <img class="metric" src="assets/metric_jf.svg" alt="J and F"></h4><div class="bar-row"><span>Clean</span><div class="track"><div class="bar clean" style="width:78.4%"></div></div><output>78.4</output></div><div class="bar-row"><span>AUV</span><div class="track"><div class="bar attack" style="width:21.1%"></div></div><output>21.1</output></div></div>
+          </div>
+          <noscript><p>The chart shows the mask prompt. Enable JavaScript to switch the prompt type.</p></noscript>
+        </div>
+      </div>
+    </section>
+
+    <section class="section visualization-section" id="visualizations" aria-labelledby="visualizations-title">
+      <div class="visualization-width">
+        <div class="section-heading qualitative-heading"><h2 id="visualizations-title">Qualitative results</h2></div>
+        <div class="visualization-grid">
+          <figure>
+            <figcaption><strong>Mask prompt</strong></figcaption>
+            <button class="figure-button" data-zoom aria-label="Enlarge mask-prompted attack comparison">
+              <img src="assets/qualitative-mask.png" width="1191" height="741" loading="lazy" alt="Mask-prompted video segmentation: input frames, clean predictions, four attack baselines, and AUV across six frames. AUV suppresses both targets after initialization.">
+              <span class="zoom-hint" aria-hidden="true">↗ Enlarge</span>
+            </button>
+          </figure>
+          <figure>
+            <figcaption><strong>Point prompt</strong></figcaption>
+            <button class="figure-button" data-zoom aria-label="Enlarge point-prompted attack comparison">
+              <img src="assets/qualitative-point.png" width="1191" height="813" loading="lazy" alt="Point-prompted video segmentation of a beach scene: clean predictions and attack baselines compared with sustained suppression by AUV.">
+              <span class="zoom-hint" aria-hidden="true">↗ Enlarge</span>
+            </button>
+          </figure>
+          <figure>
+            <figcaption><strong>Box prompt</strong></figcaption>
+            <button class="figure-button" data-zoom aria-label="Enlarge box-prompted attack comparison">
+              <img src="assets/qualitative-box.png" width="1191" height="813" loading="lazy" alt="Box-prompted video segmentation of an animal: clean predictions and attack baselines compared with AUV across six frames.">
+              <span class="zoom-hint" aria-hidden="true">↗ Enlarge</span>
+            </button>
+          </figure>
+          <figure>
+            <figcaption><strong>Language prompt</strong><span>One prompt, multiple targets</span></figcaption>
+            <button class="figure-button" data-zoom aria-label="Enlarge language-based multi-target attack examples">
+              <img src="assets/qualitative-language.png" width="1191" height="756" loading="lazy" alt="A single language prompt specifies multiple targets. Clean and attacked frames show AUV suppressing the corresponding masks throughout both sequences.">
+              <span class="zoom-hint" aria-hidden="true">↗ Enlarge</span>
+            </button>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section container" id="temporal" aria-labelledby="temporal-title">
+      <div class="section-heading"><h2 id="temporal-title">Temporal dynamics</h2></div>
+      <div class="metric-definitions">
+        <article>
+          <h3>Latency <span class="metric-symbol"><var>Lat</var>↓</span></h3>
+          <p class="metric-explanation">Measures how fast the attack takes effect.</p><p><strong>Low <var>Lat</var> → faster onset.</strong></p>
+          <math display="block" aria-label="Latency equals first collapsed frame rank divided by number of valid frames, times 100 percent"><mrow><mi>Lat</mi><mo>=</mo><mfrac><mtext>first collapse rank</mtext><mtext>valid frames</mtext></mfrac><mo>×</mo><mn>100</mn><mo>%</mo></mrow></math>
+        </article>
+        <article>
+          <h3>Coverage <span class="metric-symbol"><var>Cov</var>↑</span></h3>
+          <p class="metric-explanation">Measures how long the attack persists.</p><p><strong>High <var>Cov</var> → sustained suppression.</strong></p>
+          <math display="block" aria-label="Coverage equals number of collapsed frames divided by number of valid frames, times 100 percent"><mrow><mi>Cov</mi><mo>=</mo><mfrac><mtext>collapsed frames</mtext><mtext>valid frames</mtext></mfrac><mo>×</mo><mn>100</mn><mo>%</mo></mrow></math>
+        </article>
+        <article>
+          <h3>Delayed-Coverage <span class="metric-symbol"><var>Cov</var><sub><var>k</var></sub>↑</span></h3>
+          <p class="metric-explanation">Measures mid-video attack persistence starting from frame k.</p><p><strong>High <var>Cov</var><sub><var>k</var></sub> → sustained mid-video suppression.</strong></p>
+          <math display="block" aria-label="Delayed coverage equals collapsed frames from k divided by valid frames from k, times 100 percent"><mrow><msub><mi>Cov</mi><mi>k</mi></msub><mo>=</mo><mfrac><mtext>collapsed frames from k</mtext><mtext>valid frames from k</mtext></mfrac><mo>×</mo><mn>100</mn><mo>%</mo></mrow></math>
+        </article>
+      </div>
+      <div class="temporal-comparison" role="region" aria-label="Temporal comparison with UAP-SAM2" tabindex="0">
+        <table>
+          <thead>
+            <tr><th scope="col" rowspan="2">Method</th><th scope="colgroup" colspan="3">DAVIS17</th><th class="dataset-divider" scope="colgroup" colspan="3">YTVOS19</th></tr>
+            <tr><th scope="col"><span class="metric-symbol"><var>Lat</var>↓</span></th><th scope="col"><span class="metric-symbol"><var>Cov</var>↑</span></th><th scope="col"><span class="metric-symbol"><var>Cov</var><sub>20</sub>↑</span></th><th class="dataset-divider" scope="col"><span class="metric-symbol"><var>Lat</var>↓</span></th><th scope="col"><span class="metric-symbol"><var>Cov</var>↑</span></th><th scope="col"><span class="metric-symbol"><var>Cov</var><sub>20</sub>↑</span></th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">UAP-SAM2</th><td>52.5</td><td>35.9</td><td>43.6</td><td class="dataset-divider">50.9</td><td>41.1</td><td>47.4</td></tr>
+            <tr class="ours"><th scope="row">AUV</th><td>5.5</td><td>89.2</td><td>88.1</td><td class="dataset-divider">8.6</td><td>85.1</td><td>84.6</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="section reading-width" id="citation" aria-labelledby="citation-title">
+      <div class="citation-heading"><h2 id="citation-title">Citation</h2><button class="copy-button" id="copy-citation" type="button">Copy BibTeX</button></div>
+      <pre><code id="bibtex">@misc{shen2026auv,
+  title={Attack-Inference Aligned Universal Adversarial Attacks on Video Object Segmentation},
+  author={Shen, Ruiqi and Liu, Chang and Ding, Henghui},
+  year={2026},
+  url={https://github.com/FudanCVL/AUV}
+}</code></pre>
+      <p class="copy-status" id="copy-status" role="status"></p>
+    </section>
+  </main>
+
+  <footer>© <a href="https://github.com/FudanCVL" target="_blank" rel="noopener noreferrer">FudanCVL</a> | Last updated: 10/2026</footer>
+  <dialog id="figure-dialog" aria-label="Enlarged paper figure"><button id="close-figure" class="close-figure" type="button" aria-label="Close enlarged figure">×</button><img id="enlarged-figure" alt=""></dialog>
+</body>
+</html>
